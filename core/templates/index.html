@@ -32,6 +32,11 @@
             let station_coordinates = result.coordinates;
             let user_coordinates = [lat, longitude]
             let polyline = L.polyline([user_coordinates, station_coordinates]).addTo(map);
+
+            let popup = L.popup()
+                .setLatLng([lat, longitude])
+                .setContent(`<p>Nearest station is ${result.distance.toFixed(2)} km away.</p>`)
+                .openOn(map);
         })
     })
 
