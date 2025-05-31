@@ -23,7 +23,16 @@
     });
 
     map.on('click', (event) => {
-        L.marker([event.latlng.lat, event.latlng.lng]).addTo(map);
+        let lat = event.latlng.lat;
+        let longitude = event.latlng.lng;
+        L.marker([lat, longitude]).addTo(map);
+        fetch(`/get-nearest-station?latitude=${lat}&longitude=${longitude}`).then(
+            response => response.json()
+        ).then(result => {
+            let station_coordinates = result.coordinates;
+            let user_coordinates = [lat, longitude]
+            let polyline = L.polyline([user_coordinates, station_coordinates]).addTo(map);
+        })
     })
 
 </script>
