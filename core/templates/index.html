@@ -16,11 +16,15 @@
 
     let stations = JSON.parse(document.getElementById('stations_json').textContent);
 
-    //add marker for each stations
+    // add marker for each station
 
     stations.forEach(station => {
         L.marker([station.latitude, station.longitude]).addTo(map);
     });
+
+    map.on('click', (event) => {
+        L.marker([event.latlng.lat, event.latlng.lng]).addTo(map);
+    })
 
 </script>
 {% endblock %}
